@@ -1,34 +1,21 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema(
-    {
-        userName: { type: String, required: true },
-        email: { type: String, required: true ,},
-        address: { type: String, required: true },
-        age: { type: Number, required: true },
-        phone: { type: String, required: true },
-        password: { type: String, required: true },
-        role: {
-            type: String,
-            default: "user",
-            enum: ["user", "admin", "superAdmin"],
-        },
-        image: { type: String, default: null },
-        gender: { type: String, required: true, enum: ["male", "female"] },
-        isLogin: { type: Boolean, default: false },
-        isVerified: { type: Boolean, default: false },
-        isDeleted: { type: Boolean, default: false },
-        eventId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
-        hotelId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Hotel" }],
-        carId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Car" }],
-        restaurantId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Restaurant" }],
-        visitPlaceId: [{ type: mongoose.Schema.Types.ObjectId, ref: "VisitPlace" }],
-    },
-    {
-        timestamps: true,
-    }
-);
+const userSchema = new mongoose.Schema({
+    userName: { type: String, required: true },
+    email: { type: String, required: true },
+    address: { type: String, required: true },
+    age: { type: Number, required: true },
+    phone: { type: String, required: true },
+    password: { type: String, required: true },
+    role: { type: String, default: "user", enum: ["user", "admin", "superAdmin"] },
+    gender: { type: String, required: true, enum: ["male","female"] },
+    isLogin: { type: Boolean, default: false },
+    isVerified: { type: Boolean, default: false },
+    isDeleted: { type: Boolean, default: false }
+}, {
+    timestamps: true
+});
 
 userSchema.pre("save", async function (next) {
     try {
