@@ -1,18 +1,19 @@
 const mongoose = require("mongoose");
-const visitSchema = new mongoose.Schema({
-    visitName: { type: String, required: true },
+const eventSchema = new mongoose.Schema({
+    eventName: { type: String, required: true },
     email: { type: String, required: true },
     address: { type: String, required: true },
     phone: { type: String, required: true },
-    image: { type: String },
     location: { type: String, required: true },
-    price: { type: Number},
+    organizer: { type: String, required: true },
     rate: { type: Number},
+    price: { type: Number},
     counter: { type: Number},
     deleted: { type: Boolean, default: false },
+
 }, {
     timestamps: true
 });
-const VisitPlace = mongoose.model("VisitPlace", visitSchema);
+const Event = mongoose.model("Event", eventSchema);
 
-module.exports = VisitPlace;
+module.exports = Event;
